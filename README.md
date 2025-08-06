@@ -11,3 +11,7 @@ Many of the public firecracker tutorials failed for me at some point in the tuto
 - Running VM
 - Ability to Login to the VM
 - Ability for VM to access the Internet
+
+## How
+- Tested using a fresh Ubuntu KVM VM as a host
+- 
