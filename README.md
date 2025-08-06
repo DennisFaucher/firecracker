@@ -47,7 +47,8 @@ $ ls -l
 
 ```
 
-### Download the Rootfs (I had to modify the rootfs download instructions from the tutorial as the rootfs in the tutorial would not mount. I used the instructions form this page: https://github.com/rgl/firecracker-playground/blob/main/provision-firecracker-vm-alpine.sh)
+### Download the Rootfs
+(I had to modify the rootfs download instructions from the tutorial as the rootfs in the tutorial would not mount. I used the instructions form this page: https://github.com/rgl/firecracker-playground/blob/main/provision-firecracker-vm-alpine.sh)
 ```
 chmod +x get_nerdctl.sh (Installs the packages needed by create_rootfs.sh)
 ./get_nerdctl.sh
