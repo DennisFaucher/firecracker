@@ -38,12 +38,13 @@ ls -l /dev/kvm
 chmod +x get_firecracker_binary.sh
 ./get_firecracker_binary.sh
 
-$ ls -lh
--rwxrwxr-x 1 dennis dennis 1.8K Aug  6 13:18 create_rootfs.sh
--rwxr-xr-x 1 dennis dennis 2.8M Jun 24 08:19 firecracker
--rwxrwxr-x 1 dennis dennis  403 Aug  6 10:28 get_firecracker_binary.sh
--rwxrwxr-x 1 dennis dennis 1.7K Aug  6 10:26 get_kernel_rootfs.sh
--rwxrwxr-x 1 dennis dennis  765 Aug  6 13:26 get_nerdctl.sh
+$ ls -l
+-rwxrwxr-x 1 dennis dennis      1793 Aug  6 13:18 create_rootfs.sh
+-rwxr-xr-x 1 dennis dennis   2892072 Jun 24 08:19 firecracker
+-rwxrwxr-x 1 dennis dennis       403 Aug  6 10:28 get_firecracker_binary.sh
+-rwxrwxr-x 1 dennis dennis      1669 Aug  6 16:53 get_kernel.sh
+-rwxrwxr-x 1 dennis dennis       765 Aug  6 13:26 get_nerdctl.sh
+
 ```
 
 - Download the Rootfs (I had to modify the rootfs download instructions from the tutorial as the rootfs in the tutorial would not mount. I used the instructions form this page: https://github.com/rgl/firecracker-playground/blob/main/provision-firecracker-vm-alpine.sh)
@@ -51,11 +52,31 @@ $ ls -lh
 chmod +x get_nerdctl.sh (Installs the packages needed by create_rootfs.sh)
 ./get_nerdctl.sh
 
-chmnod +x create_rootfs.sh
+chmod +x create_rootfs.sh
 sudo ./create_rootfs.sh
 sudo mv /tmp/firecracker-vm-alpine-rootfs .
+
+$ ls -l
+-rwxrwxr-x 1 dennis dennis      1793 Aug  6 13:18 create_rootfs.sh
+-rwxr-xr-x 1 dennis dennis   2892072 Jun 24 08:19 firecracker
+-rw------- 1 root   root   134217728 Aug  6 14:45 firecracker-vm-alpine-rootfs.ext4
+-rwxrwxr-x 1 dennis dennis       403 Aug  6 10:28 get_firecracker_binary.sh
+-rwxrwxr-x 1 dennis dennis      1655 Aug  6 10:26 get_kernel_rootfs.sh
+-rwxrwxr-x 1 dennis dennis      1669 Aug  6 16:53 get_kernel.sh
+-rwxrwxr-x 1 dennis dennis       765 Aug  6 13:26 get_nerdctl.sh
 ```
 
 - Download the kernel
 ```
+chmod +x get_kernel.sh
+./get_kernel.sh
+$ ls -l
+-rwxrwxr-x 1 dennis dennis      1793 Aug  6 13:18 create_rootfs.sh
+-rwxr-xr-x 1 dennis dennis   2892072 Jun 24 08:19 firecracker
+-rw------- 1 root   root   134217728 Aug  6 14:45 firecracker-vm-alpine-rootfs.ext4
+-rwxrwxr-x 1 dennis dennis       403 Aug  6 10:28 get_firecracker_binary.sh
+-rwxrwxr-x 1 dennis dennis      1655 Aug  6 10:26 get_kernel_rootfs.sh
+-rwxrwxr-x 1 dennis dennis      1669 Aug  6 16:53 get_kernel.sh
+-rwxrwxr-x 1 dennis dennis       765 Aug  6 13:26 get_nerdctl.sh
+-rw-rw-r-- 1 dennis dennis  40944760 Mar 10 10:16 vmlinux-6.1.128
 ```
