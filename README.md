@@ -35,39 +35,27 @@ ls -l /dev/kvm
 ```
 - Download the Firecracker Binary
 ```
-mkdir Firecracker
-cd Firecracker
 chmod +x get_firecracker_binary.sh
-./get_firecracker_binary.sh
-```
-
-- Download the Kernal and Rootfs (I had to modify the rootfs download instructions from the tutorial as the rootfs in the tutorial would not mount
-```
-chmod +x get_kernel_rootfs.sh
 ./get_firecracker_binary.sh
 
 $ ls -lh
-total 337M
-drwxr-xr-x 2 root   root   4.0K Aug  6 13:26 bin
 -rwxrwxr-x 1 dennis dennis 1.8K Aug  6 13:18 create_rootfs.sh
 -rwxr-xr-x 1 dennis dennis 2.8M Jun 24 08:19 firecracker
--rw-rw-r-- 1 dennis dennis  13K Aug  6 14:41 firecracker.log
--rw------- 1 root   root   128M Aug  6 14:45 firecracker-vm-alpine-rootfs.ext4
 -rwxrwxr-x 1 dennis dennis  403 Aug  6 10:28 get_firecracker_binary.sh
 -rwxrwxr-x 1 dennis dennis 1.7K Aug  6 10:26 get_kernel_rootfs.sh
 -rwxrwxr-x 1 dennis dennis  765 Aug  6 13:26 get_nerdctl.sh
--rw-rw-r-- 1 dennis dennis  30M Aug  6 13:18 hello-rootfs.ext4
--rw-r--r-- 1 dennis dennis  104 Aug  6 10:27 id_rsa.pub
--rw-r--r-- 1 root   root    16K Aug  6 14:16 mem_file_path
-drwxrwxr-x 2 dennis dennis 4.0K Aug  6 10:29 release-v1.12.1-x86_64
--rw-r--r-- 1 root   root   128M Aug  6 14:16 snapshot_path
--rwxrwxr-x 1 dennis dennis  170 Aug  6 10:30 start_firecracker.sh
--rwxrwxr-x 1 dennis dennis 3.2K Aug  6 14:32 start_the_vm_firecracker.sh
--rwxrwxr-x 1 dennis dennis 3.2K Aug  6 10:52 start_the_vm_hello.sh
--rwxrwxr-x 1 dennis dennis 3.2K Aug  6 10:33 start_the_vm.sh
--rw-rw-r-- 1 dennis dennis 400M Aug  6 10:27 ubuntu-24.04.ext4
--rw------- 1 dennis dennis  419 Aug  6 10:27 ubuntu-24.04.id_rsa
--rw-rw-r-- 1 dennis dennis  78M Mar 10 10:16 ubuntu-24.04.squashfs.upstream
--rw-rw-r-- 1 dennis dennis  40M Mar 10 10:16 vmlinux-6.1.128
+```
 
+- Download the Rootfs (I had to modify the rootfs download instructions from the tutorial as the rootfs in the tutorial would not mount. I used the instructions form this page: https://github.com/rgl/firecracker-playground/blob/main/provision-firecracker-vm-alpine.sh)
+```
+chmod +x get_nerdctl.sh (Installs the packages needed by create_rootfs.sh)
+./get_nerdctl.sh
+
+chmnod +x create_rootfs.sh
+sudo ./create_rootfs.sh
+sudo mv /tmp/firecracker-vm-alpine-rootfs .
+```
+
+- Download the kernel
+```
 ```
