@@ -70,6 +70,7 @@ $ ls -l
 ```
 chmod +x get_kernel.sh
 ./get_kernel.sh
+
 $ ls -l
 -rwxrwxr-x 1 dennis dennis      1793 Aug  6 13:18 create_rootfs.sh
 -rwxr-xr-x 1 dennis dennis   2892072 Jun 24 08:19 firecracker
@@ -79,4 +80,22 @@ $ ls -l
 -rwxrwxr-x 1 dennis dennis      1669 Aug  6 16:53 get_kernel.sh
 -rwxrwxr-x 1 dennis dennis       765 Aug  6 13:26 get_nerdctl.sh
 -rw-rw-r-- 1 dennis dennis  40944760 Mar 10 10:16 vmlinux-6.1.128
+```
+
+- Start Firecracker
+  - Do this in a dedicated terminal session
+```
+API_SOCKET="/tmp/firecracker.socket"
+
+# Remove API unix socket if left over from before
+sudo rm -f $API_SOCKET
+
+# Run firecracker
+sudo ./firecracker --api-sock "${API_SOCKET}"
+```
+  - You will get a console output like this
+```
+2025-08-06T14:41:21.599408679 [anonymous-instance:main] Running Firecracker v1.12.1
+2025-08-06T14:41:21.599637508 [anonymous-instance:main] Listening on API socket ("/tmp/firecracker.socket").
+2025-08-06T14:41:21.600029916 [anonymous-instance:fc_api] API server started.
 ```
