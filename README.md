@@ -99,29 +99,53 @@ sudo ./firecracker --api-sock "${API_SOCKET}"
 
 ```
 
-### Set up Guest Networking
-(There are commands in the tutorial but I failed due to SSH Key)
-(Try to get this working)
-#### Create an ssh key for the rootfs
-unsquashfs ubuntu-$ubuntu_version.squashfs.upstream
-ssh-keygen -f id_rsa -N ""
-cp -v id_rsa.pub squashfs-root/root/.ssh/authorized_keys
-mv -v id_rsa ./ubuntu-$ubuntu_version.id_rsa
-#### create ext4 filesystem image
-sudo chown -R root:root squashfs-root
-truncate -s 400M ubuntu-$ubuntu_version.ext4
-sudo mkfs.ext4 -d squashfs-root -F ubuntu-$ubuntu_version.ext4
+### Hacky Crap to Get Guest Networking Working
+There are much more elegant ways to do this, but this is what worked for me
+Basically, I want to configure eth0 on the guest, and start the ssh-server on boot.
+All these commands are run in the VM once it is booted and you have logged into the console as root/root
 
-#### Verify everything was correctly set up and print versions
-echo "Kernel: $(ls vmlinux-* | tail -1)"
-echo "Rootfs: $(ls *.ext4 | tail -1)"
-echo "SSH Key: $(ls *.id_rsa | tail -1)"
+##### Create an init.d script
+```
+# cat /etc/init.d/networkconfig 
+#!/sbin/openrc-run
+description="Configure eth0"
 
-# Setup internet access in the guest
-ssh -i $KEY_NAME root@172.16.0.2  "ip route add default via 172.16.0.1 dev eth0"
+depend() {
+	need root
+}
 
-# Setup DNS resolution in the guest
-ssh -i $KEY_NAME root@172.16.0.2  "echo 'nameserver 8.8.8.8' > /etc/resolv.conf"
+start() {
+        ip addr add 172.16.0.2/30 dev eth0
+        ip link set eth0 up
+        ip route add default via 172.16.0.1 dev eth0
+}
+```
+
+#### Enable the init.d script
+```
+# rc-update add networkconfig
+```
+
+#### Enable sshd
+```
+# rc-update add sshd
+
+# rc-status
+Runlevel: default
+ sshd
+ [  stopped  ]
+ networkconfig
+ [  started  ]
+Dynamic Runlevel: hotplugged
+Dynamic Runlevel: needed/wanted
+ modules
+ [  started  ]
+ fsck
+ [  started  ]
+ root
+ [  started  ]
+Dynamic Runlevel: manual
+```
 
 ## Function as a Service (FaaS) - Dad Jokes
 2025-08-06T14:41:21.599408679 [anonymous-instance:main] Running Firecracker v1.12.1
