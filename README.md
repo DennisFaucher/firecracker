@@ -251,9 +251,10 @@ $ curl 172.16.0.2
 </body>
 </html>
 ```
-- Terminal 01 - Create Dad Jokes HTML
+- Terminal 02 - Pull the Dad Jokes HTML
 ```
+wget https://github.com/DennisFaucher/firecracker/blob/main/dad_joke_generator.html -o /var/lib/nginx/html/dad_jokes_generator.html
 # vi /var/lib/nginx/html/dad_jokes_generator.html
-(Paste contents of dad_jokes_generator.html from this repo)
+(Paste contents of dad_jokes_generator.html from this repo or scp the file to the VM)
 ```
 
