@@ -99,6 +99,13 @@ sudo ./firecracker --api-sock "${API_SOCKET}"
 
 ```
 
+### Set up Guest Networking
+(There are commands in the tutorial but I failed due to SSH Key
+# Setup internet access in the guest
+ssh -i $KEY_NAME root@172.16.0.2  "ip route add default via 172.16.0.1 dev eth0"
+
+# Setup DNS resolution in the guest
+ssh -i $KEY_NAME root@172.16.0.2  "echo 'nameserver 8.8.8.8' > /etc/resolv.conf"
 
 ## Function as a Service (FaaS) - Dad Jokes
 2025-08-06T14:41:21.599408679 [anonymous-instance:main] Running Firecracker v1.12.1
