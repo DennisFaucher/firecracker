@@ -97,9 +97,10 @@ sudo ./firecracker --api-sock "${API_SOCKET}"
 - You will get a console output like this
 ```
 
+```
+
 
 ## Function as a Service (FaaS) - Dad Jokes
 2025-08-06T14:41:21.599408679 [anonymous-instance:main] Running Firecracker v1.12.1
 2025-08-06T14:41:21.599637508 [anonymous-instance:main] Listening on API socket ("/tmp/firecracker.socket").
 2025-08-06T14:41:21.600029916 [anonymous-instance:fc_api] API server started.
-```
