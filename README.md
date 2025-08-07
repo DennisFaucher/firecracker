@@ -100,7 +100,23 @@ sudo ./firecracker --api-sock "${API_SOCKET}"
 ```
 
 ### Set up Guest Networking
-(There are commands in the tutorial but I failed due to SSH Key
+(There are commands in the tutorial but I failed due to SSH Key)
+(Try to get this working)
+#### Create an ssh key for the rootfs
+unsquashfs ubuntu-$ubuntu_version.squashfs.upstream
+ssh-keygen -f id_rsa -N ""
+cp -v id_rsa.pub squashfs-root/root/.ssh/authorized_keys
+mv -v id_rsa ./ubuntu-$ubuntu_version.id_rsa
+#### create ext4 filesystem image
+sudo chown -R root:root squashfs-root
+truncate -s 400M ubuntu-$ubuntu_version.ext4
+sudo mkfs.ext4 -d squashfs-root -F ubuntu-$ubuntu_version.ext4
+
+#### Verify everything was correctly set up and print versions
+echo "Kernel: $(ls vmlinux-* | tail -1)"
+echo "Rootfs: $(ls *.ext4 | tail -1)"
+echo "SSH Key: $(ls *.id_rsa | tail -1)"
+
 # Setup internet access in the guest
 ssh -i $KEY_NAME root@172.16.0.2  "ip route add default via 172.16.0.1 dev eth0"
 
