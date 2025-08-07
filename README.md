@@ -22,6 +22,7 @@ Many of the public firecracker tutorials failed for me at some point in the tuto
 - https://github.com/firecracker-microvm/firecracker/blob/main/docs/getting-started.md
 - https://github.com/firecracker-microvm/firecracker/blob/main/docs/network-setup.md#in-the-guest
 - https://github.com/rgl/firecracker-playground/blob/main/provision-firecracker-vm-alpine.sh (Fixed rootfs that would not mount)
+- https://wiki.alpinelinux.org/wiki/Writing_Init_Scripts
 
 ## How
 - Tested using a fresh Ubuntu KVM VM as a host
@@ -135,6 +136,7 @@ Kernel 6.1.128 on an x86_64 (/dev/ttyS0)
 There are much more elegant ways to do this, but this is what worked for me
 Basically, I want to configure eth0 on the guest, and start the ssh-server on boot.
 All these commands are run in the VM once it is booted and you have logged into the console as root/root
+Commands are from this tutorial: https://github.com/firecracker-microvm/firecracker/blob/main/docs/network-setup.md#in-the-guest
 
 ##### Create an init.d script
 ```
@@ -158,7 +160,7 @@ start() {
 # rc-update add networkconfig
 ```
 
-#### Enable sshd
+#### Enable the sshd that was installed during create_rootfs.sh
 ```
 # rc-update add sshd
 
@@ -177,6 +179,49 @@ Dynamic Runlevel: needed/wanted
  root
  [  started  ]
 Dynamic Runlevel: manual
+```
+
+### Reboot the VM and the network should come up automagically
+- On Terminal01
+```
+(none):~# reboot
+(none):~#  * Stopping sshd ... [ ok ]
+The system is going down NOW!
+Sent SIGTERM to all processes
+Sent SIGKILL to all processes
+Requesting system reboot
+[ 4020.685071] reboot: Restarting system
+[ 4020.688440] reboot: machine restart
+```
+- The VM does not actually restart, it shuts down. To restart, follow the instructions again in "Start Firecracker" and "Start the VM". You should have networking on boot
+- Terminal 01
+```
+sudo rm -f $API_SOCKET
+sudo ./firecracker --api-sock "${API_SOCKET}"
+```
+- Terminal 02
+```
+./start_the_vm_firecracker.sh
+```
+- Terminal 01 (after login)
+```
+(none):~# ip a
+1: lo: <LOOPBACK> mtu 65536 qdisc noop state DOWN qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 1000
+    link/ether 06:00:ac:10:00:02 brd ff:ff:ff:ff:ff:ff
+    inet 172.16.0.2/30 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::400:acff:fe10:2/64 scope link 
+       valid_lft forever preferred_lft forever
+
+(none):~# ping -c1 google.com
+PING google.com (142.251.40.206): 56 data bytes
+64 bytes from 142.251.40.206: seq=0 ttl=113 time=28.163 ms
+
+--- google.com ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max = 28.163/28.163/28.163 ms
 ```
 
 ## Function as a Service (FaaS) - Dad Jokes
