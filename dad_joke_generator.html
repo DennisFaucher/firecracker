@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dad Joke Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .joke-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 5px solid #667eea;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .joke-container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        #joke-text {
+            font-size: 1.3em;
+            line-height: 1.6;
+            color: #333;
+            font-style: italic;
+        }
+
+        button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        button:hover::before {
+            left: 100%;
+        }
+
+        .emoji {
+            font-size: 2em;
+            margin: 0 10px;
+            animation: wiggle 1s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 7% {
+                transform: rotateZ(0);
+            }
+            15% {
+                transform: rotateZ(-15deg);
+            }
+            20% {
+                transform: rotateZ(10deg);
+            }
+            25% {
+                transform: rotateZ(-10deg);
+            }
+            30% {
+                transform: rotateZ(6deg);
+            }
+            35% {
+                transform: rotateZ(-4deg);
+            }
+            40%, 100% {
+                transform: rotateZ(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            #joke-text {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤣 Dad Joke Generator 🤣</h1>
+        <div class="joke-container">
+            <p id="joke-text">Click the button below for a knee-slapping dad joke!</p>
+        </div>
+        <button onclick="getRandomJoke()">
+            <span class="emoji">😂</span>
+            Get New Joke
+            <span class="emoji">😂</span>
+        </button>
+    </div>
+
+    <script>
+        const dadJokes = [
+            "Why don't scientists trust atoms? Because they make up everything!",
+            "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+            "What do you call a fake noodle? An impasta!",
+            "Why did the scarecrow win an award? He was outstanding in his field!",
+            "I would avoid the sushi if I was you. It's a little fishy.",
+            "Want to hear a joke about construction? I'm still working on it.",
+            "What did the grape say when it got stepped on? Nothing, it just let out a little wine!",
+            "I used to hate facial hair, but then it grew on me.",
+            "Why don't skeletons fight each other? They don't have the guts.",
+            "What's the best thing about Switzerland? I don't know, but the flag is a big plus.",
+            "I invented a new word: Plagiarism!",
+            "Did you hear about the mathematician who's afraid of negative numbers? He'll stop at nothing to avoid them.",
+            "Why do fathers take an extra pair of socks when they go golfing? In case they get a hole in one!",
+            "Singing in the shower is fun until you get soap in your mouth. Then it's a soap opera.",
+            "What do you call a bear with no teeth? A gummy bear!",
+            "Why did the coffee file a police report? It got mugged!",
+            "How do you organize a space party? You planet!",
+            "What's orange and sounds like a parrot? A carrot!",
+            "Why don't eggs tell jokes? They'd crack each other up!",
+            "What do you call a dinosaur that crashes his car? Tyrannosaurus Wrecks!",
+            "I'm reading a book about anti-gravity. It's impossible to put down!",
+            "Did you hear about the claustrophobic astronaut? He just needed some space.",
+            "What's the difference between a fish and a piano? You can't tuna fish!",
+            "Why did the bicycle fall over? Because it was two-tired!",
+            "What do you call a sleeping bull? A bulldozer!",
+            "Why don't programmers like nature? It has too many bugs.",
+            "What did one wall say to the other wall? I'll meet you at the corner!",
+            "Why did the math book look so sad? Because it had too many problems!",
+            "What do you call a pig that does karate? A pork chop!",
+            "How does a penguin build its house? Igloos it together!"
+        ];
+
+        function getRandomJoke() {
+            const jokeText = document.getElementById('joke-text');
+            const randomIndex = Math.floor(Math.random() * dadJokes.length);
+            const newJoke = dadJokes[randomIndex];
+            
+            // Add a fade effect
+            jokeText.style.opacity = '0';
+            
+            setTimeout(() => {
+                jokeText.textContent = newJoke;
+                jokeText.style.opacity = '1';
+            }, 150);
+        }
+
+        // Add transition effect to joke text
+        document.getElementById('joke-text').style.transition = 'opacity 0.3s ease';
+
+        // Load a random joke when the page loads
+        window.addEventListener('load', getRandomJoke);
+    </script>
+</body>
+</html>
