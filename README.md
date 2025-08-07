@@ -14,8 +14,8 @@ Firecracker is a virtual machine monitor (VMM) that uses the Linux Kernel-based 
 Many of the public firecracker tutorials failed for me at some point in the tutorial. I took the working portions of the first few tutorials I tried and combined them into a process that works for me
 
 ## Goals
-- Running VM
-- Ability to Login to the VM
+- A running VM
+- Ability to login to the VM
 - Ability for VM to access the Internet
 
 ## Tutorials Used
