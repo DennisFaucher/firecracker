@@ -71,6 +71,7 @@ $ ls -l
 ```
 chmod +x get_kernel.sh
 ./get_kernel.sh
+(I commented out the PKI sections of this script as they are for a different rootfs tutorial and failed)
 
 $ ls -l
 -rwxrwxr-x 1 dennis dennis      1793 Aug  6 13:18 create_rootfs.sh
@@ -84,7 +85,7 @@ $ ls -l
 ```
 
 ### Start Firecracker
-- Do this in a dedicated terminal session
+- Do this in a dedicated terminal session. We'll call this Terminal01
 ```
 API_SOCKET="/tmp/firecracker.socket"
 
@@ -96,10 +97,34 @@ sudo ./firecracker --api-sock "${API_SOCKET}"
 ```
 - You will get a console output like this
 ```
-
+2025-08-07T16:15:45.558235536 [anonymous-instance:main] Running Firecracker v1.12.1
+2025-08-07T16:15:45.558365147 [anonymous-instance:main] Listening on API socket ("/tmp/firecracker.socket").
+2025-08-07T16:15:45.558635012 [anonymous-instance:fc_api] API server started.
 ```
 
-### Hacky Crap to Get Guest Networking Working
+### Start the VM
+- Open a new terminal tab on the host. We'll call this Terminal02
+```
+./start_the_vm_firecracker.sh
+```
+- This will start the VM, show all the console messages on Terminal01 and then bring you to a login prompt like this:
+
+```
+[snip]
+
+ * Checking local filesystems  ... [ ok ]
+ * Remounting filesystems ... [ ok ]
+ * Starting sshd ... [ ok ]
+
+Welcome to Alpine Linux 3.20
+Kernel 6.1.128 on an x86_64 (/dev/ttyS0)
+
+(none) login: 
+
+```
+- Login with the username root and the password root. Alpine Linux will be running but eth0 will not be active yet
+
+### Dennis' Hacky Crap to Get Guest Networking Working
 There are much more elegant ways to do this, but this is what worked for me
 Basically, I want to configure eth0 on the guest, and start the ssh-server on boot.
 All these commands are run in the VM once it is booted and you have logged into the console as root/root
