@@ -26,6 +26,7 @@ Many of the public firecracker tutorials failed for me at some point in the tuto
 ## How
 - Tested using a fresh Ubuntu KVM VM as a host
 - I used the first tutorial except for the creation of the rootfs (which would not mount on boot). https://github.com/firecracker-microvm/firecracker/blob/main/docs/getting-started.md
+  
 ### Set Up KVM Access on Ubuntu Host
 ```
 lsmod | grep kvm
