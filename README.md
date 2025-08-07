@@ -225,3 +225,35 @@ round-trip min/avg/max = 28.163/28.163/28.163 ms
 ```
 
 ## Function as a Service (FaaS) - Dad Jokes (WIP)
+### Add nginx
+- Terminal01 (After logging in)
+```
+# apk add nginx
+# rc-update add nginx
+(nginx depends on the service "networking" which is not running. Comment that dependancy.)
+
+# vi /etc/init.d/nginx
+depend() {
+#       need net
+        use dns logger netmount
+}
+
+# service nginx start
+```
+- Terminal01 - Test nginx
+```
+$ curl 172.16.0.2
+<html>
+<head><title>404 Not Found</title></head>
+<body>
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+```
+- Terminal 01 - Create Dad Jokes HTML
+```
+# vi /var/lib/nginx/html/dad_jokes_generator.html
+(Paste contents of dad_jokes_generator.html from this repo)
+```
+
