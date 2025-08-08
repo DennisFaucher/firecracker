@@ -271,8 +271,8 @@ dad_joke_generator.h 100% |********************************|  7883  0:00:00 ETA
 ### Test the Dad Jokes Function Page
 <img width="1248" height="805" alt="DadJokePage2" src="https://github.com/user-attachments/assets/d4c070fe-9682-463e-b66f-2a120103943b" />
 
-# Performance and Resource Usage
-## Performance
+## Performance and Resource Usage
+### Performance
 - I wrote a little script that captures the time, starts firecracker, waits for the login:, captures the time again and subtracts.
 ```
 $ ./time_boot.sh 
@@ -281,8 +281,8 @@ Boot time: 3.261094768 seconds.
 - This includes the time for Dennis to switch to a second terminal session and run ./start_the_vm_firecracker.sh, so maybe subtract a second for that.
 - My simple, full-fat, Ubuntu Multipass VM booted quickly but took 12 whole seconds!
   
-## Resource Utilization
-### CPU Usage - Very little at rest on a single CPU core
+### Resource Utilization
+#### CPU Usage - Very little at rest on a single CPU core
 ```
 # grep processor /proc/cpuinfo
 processor	: 0
@@ -295,7 +295,7 @@ Average:     all    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00
 
 ```
 
-### Memory Usage - About 13 MB
+#### Memory Usage - About 13 MB
 
 ```
 # grep MemTotal /proc/meminfo 
@@ -307,7 +307,7 @@ Mem:            107          13          89           1           5          89
 Swap:             0           0           0
 ```
 
-### Disk Usage - 25 MB
+#### Disk Usage - 25 MB
 ```
 # df -h
 Filesystem                Size      Used Available Use% Mounted on
