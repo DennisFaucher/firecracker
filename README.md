@@ -233,7 +233,9 @@ Lighttpd
 # chown -R lighttpd:lighttpd /var/www/localhost/ /var/log/lighttpd 
 # rc-update add lighttpd default
 
-# vi /etc/init.d/lighttpd (What if I "rc-update add networking"?)
+(So, the lighttpd service depends on the networking service. The slimmed down Alpine VM cannot start the networking service. Need to comment out the "need net" in the lighttpd service script.)
+
+# vi /etc/init.d/lighttpd 
 depend() {
 #       need net
         use mysql logger spawn-fcgi ldap slapd netmount dns
