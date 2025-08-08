@@ -275,7 +275,11 @@ dad_joke_generator.h 100% |********************************|  7883  0:00:00 ETA
 - I wrote a little script that captures the time, starts firecracker, waits for the login:, captures the time again and subtracts.
 ```
 $ ./time_boot.sh 
-Boot time: 3.261094768 seconds
+Boot time: 3.261094768 seconds.
+
+This includes the time for Dennis to switch to a second terminal session and run ./start_the_vm_firecracker.sh, so maybe subtract a second for that.
+
+My simple, full-fat, Ubuntu Multipass VM booted quickly but took 12 whole seconds!
 ```
 ## Resource Utilization
 
