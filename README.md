@@ -6,7 +6,7 @@ I have been reading about simple, fast, programmatic virtual machines. First, I 
 
 Here is the description of firecracker from https://firecracker-microvm.github.io/
 
-"Firecracker enables you to deploy workloads in lightweight virtual machines, called microVMs, which provide enhanceds ecurity and workload isolation over traditional VMs, while enabling the speed and resource efficiency of containers. Firecracker was developed at Amazon Web Services to improve the customer experience of services like AWS Lambda and AWS Fargate.
+"Firecracker enables you to deploy workloads in lightweight virtual machines, called microVMs, which provide enhanced security and workload isolation over traditional VMs, while enabling the speed and resource efficiency of containers. Firecracker was developed at Amazon Web Services to improve the customer experience of services like AWS Lambda and AWS Fargate.
 
 Firecracker is a virtual machine monitor (VMM) that uses the Linux Kernel-based Virtual Machine (KVM) to create and manage microVMs. Firecracker has a minimalist design. It excludes unnecessary devices and guest functionality to reduce the memory footprint and attack surface area of each microVM. This improves security, decreases the startup time, and increases hardware utilization. Firecracker is generally available on 64-bit Intel, AMD and Arm CPUs with support for hardware virtualization."
 
