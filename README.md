@@ -193,7 +193,7 @@ Requesting system reboot
 [ 4020.685071] reboot: Restarting system
 [ 4020.688440] reboot: machine restart
 ```
-- The VM does not actually restart, it shuts down. To restart, follow the instructions again in "Start Firecracker" and "Start the VM". You should have networking on boot
+- The VM does not actually restart, it shuts down. To get the VM running again, follow the instructions again in "Start Firecracker" and "Start the VM". You should now have networking on boot
 - Terminal 01
 ```
 sudo rm -f $API_SOCKET
