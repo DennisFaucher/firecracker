@@ -314,5 +314,9 @@ Filesystem                Size      Used Available Use% Mounted on
 /dev/root               103.9M     25.7M     69.3M  27% /
 ```
 
+## Postscript
+- I wish I had found this easy peasy firectl tutorial first 🙂
+- https://s8sg.medium.com/quick-start-with-firecracker-and-firectl-in-ubuntu-f58aeedae04b
+
 
 
