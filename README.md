@@ -2,7 +2,7 @@
 Learning Firecracker "Serverless" MicroVMs
 
 ## Why?
-I have been reading about simple, fast, programmatic virtual machines. First, I learned Ubuntu Multipass (full-fat, but quick to deploy VMs), and then moved on to Firecracker. If you have every used an AWS serverless function, or written an AWS serverless function, the function runs on a short-lived VM. That VM uses the firecracker technology.
+I have been reading about simple, fast, programmatic virtual machines. First, I learned Ubuntu Multipass (full-fat, but quick to deploy VMs), and then moved on to Firecracker. If you have ever used an AWS serverless function, or written an AWS serverless function, the function runs on a short-lived VM. That VM uses the firecracker technology.
 
 Here is the description of firecracker from https://firecracker-microvm.github.io/
 
