@@ -10,21 +10,21 @@ Here is the description of firecracker from https://firecracker-microvm.github.i
 
 Firecracker is a virtual machine monitor (VMM) that uses the Linux Kernel-based Virtual Machine (KVM) to create and manage microVMs. Firecracker has a minimalist design. It excludes unnecessary devices and guest functionality to reduce the memory footprint and attack surface area of each microVM. This improves security, decreases the startup time, and increases hardware utilization. Firecracker is generally available on 64-bit Intel, AMD and Arm CPUs with support for hardware virtualization."
 
-## Challenges
+### Challenges
 Many of the public firecracker tutorials failed for me at some point in the tutorial. I took the working portions of the first few tutorials I tried and combined them into a process that works for me
 
-## Goals
+### Goals
 - A running VM
 - Ability to login to the VM
 - Ability for VM to access the Internet
 
-## Tutorials Used
+### Tutorials Used
 - https://github.com/firecracker-microvm/firecracker/blob/main/docs/getting-started.md
 - https://github.com/firecracker-microvm/firecracker/blob/main/docs/network-setup.md#in-the-guest
 - https://github.com/rgl/firecracker-playground/blob/main/provision-firecracker-vm-alpine.sh (Fixed rootfs that would not mount)
 - https://wiki.alpinelinux.org/wiki/Writing_Init_Scripts
 
-## How
+## How?
 - Tested using a fresh Ubuntu KVM VM as a host
 - I used the first tutorial except for the creation of the rootfs (which would not mount on boot). https://github.com/firecracker-microvm/firecracker/blob/main/docs/getting-started.md
   
