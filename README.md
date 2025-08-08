@@ -276,10 +276,42 @@ dad_joke_generator.h 100% |********************************|  7883  0:00:00 ETA
 ```
 $ ./time_boot.sh 
 Boot time: 3.261094768 seconds.
-
-This includes the time for Dennis to switch to a second terminal session and run ./start_the_vm_firecracker.sh, so maybe subtract a second for that.
-
-My simple, full-fat, Ubuntu Multipass VM booted quickly but took 12 whole seconds!
 ```
+- This includes the time for Dennis to switch to a second terminal session and run ./start_the_vm_firecracker.sh, so maybe subtract a second for that.
+- My simple, full-fat, Ubuntu Multipass VM booted quickly but took 12 whole seconds!
+  
 ## Resource Utilization
+### CPU Usage - Very little at rest on a single CPU core
+```
+# grep processor /proc/cpuinfo
+processor	: 0
+
+# mpstat 5 1
+Linux 6.1.128 ((none))	08/06/25	_x86_64_	(1 CPU)
+
+Average:     CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest   %idle
+Average:     all    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
+
+```
+
+### Memory Usage - About 13 MB
+
+```
+# grep MemTotal /proc/meminfo 
+MemTotal:         109464 kB
+
+# free -m
+              total        used        free      shared  buff/cache   available
+Mem:            107          13          89           1           5          89
+Swap:             0           0           0
+```
+
+### Disk Usage - 25 MB
+```
+# df -h
+Filesystem                Size      Used Available Use% Mounted on
+/dev/root               103.9M     25.7M     69.3M  27% /
+```
+
+
 
