@@ -115,7 +115,7 @@ sudo ./firecracker --api-sock "${API_SOCKET}"
 ```
 ./start_the_vm_firecracker.sh
 ```
-- This will start the VM, show all the console messages on Terminal01 and then bring you to a login prompt like this:
+- This will set up NAT on the host, start the VM, show all the console messages on Terminal01 and then bring you to a login prompt like this:
 
 ```
 [snip]
@@ -228,33 +228,52 @@ round-trip min/avg/max = 28.163/28.163/28.163 ms
 ### Add nginx
 - Terminal01 (After logging in)
 ```
-# apk add nginx
-# rc-update add nginx
-(nginx depends on the service "networking" which is not running. Comment that dependancy.)
+Lighttpd
+# apk add lighttpd
+# chown -R lighttpd:lighttpd /var/www/localhost/ /var/log/lighttpd 
+# rc-update add lighttpd default
 
-# vi /etc/init.d/nginx
+# vi /etc/init.d/lighttpd
 depend() {
 #       need net
-        use dns logger netmount
+        use mysql logger spawn-fcgi ldap slapd netmount dns
+        after firewall
+        after famd
+        after sshd
 }
 
-# service nginx start
+# rc-service lighttpd restart
+
+echo "Hello, World!" > /var/www/localhost/htdocs/index.html
+
+
 ```
-- Terminal01 - Test nginx
+- Terminal02 - Test nginx
 ```
 $ curl 172.16.0.2
-<html>
-<head><title>404 Not Found</title></head>
-<body>
-<center><h1>404 Not Found</h1></center>
-<hr><center>nginx</center>
-</body>
-</html>
+Hello, World!
 ```
-- Terminal 02 - Pull the Dad Jokes HTML
+
+### Get the Dad Jokes Function Page
+- Terminal 01 - Pull the Dad Jokes HTML
 ```
-wget https://github.com/DennisFaucher/firecracker/blob/main/dad_joke_generator.html -o /var/lib/nginx/html/dad_jokes_generator.html
-# vi /var/lib/nginx/html/dad_jokes_generator.html
-(Paste contents of dad_jokes_generator.html from this repo or scp the file to the VM)
+# cd /var/www/localhost/htdocs/
+# wget https://raw.githubusercontent.com/DennisFaucher/firecracker/refs/heads/main/dad_joke_generator.html
+
+Connecting to raw.githubusercontent.com (185.199.111.133:443)
+saving to 'dad_joke_generator.html'
+dad_joke_generator.h 100% |********************************|  7883  0:00:00 ETA
+'dad_joke_generator.html' saved
 ```
+### Test the Dad Jokes Function Page
+<img width="1249" height="865" alt="DadJokePage" src="https://github.com/user-attachments/assets/07d7d7f6-a26c-4457-affb-56fe7bec5786" />
+
+# Performance and Resource Usage
+## Performance
+- I wrote a little script that captures the time, starts firecracker, waits for the login:, captures the time again and subtracts.
+```
+$ ./time_boot.sh 
+Boot time: 3.261094768 seconds
+```
+## Resource Utilization
 
