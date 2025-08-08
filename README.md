@@ -225,7 +225,7 @@ round-trip min/avg/max = 28.163/28.163/28.163 ms
 ```
 
 ## Function as a Service (FaaS) - Dad Jokes
-- What's an AWS Lambda clone without a function to run? Back in the arly days of Lambda, I learned FaaS by writing a "Dad Jokes Skill" for Alexa in Lambda. Let's create a simple Dad Joke web page to query on our firecracker VM.
+- What's an AWS Lambda clone without a function to run? Back in the early days of Lambda, I learned FaaS by writing a "Dad Jokes Skill" for Alexa in Lambda. Let's create a simple Dad Joke web page to query on our firecracker VM.
 ### Add nginx
 - Terminal01 (After logging in)
 ```
