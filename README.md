@@ -233,7 +233,7 @@ Lighttpd
 # chown -R lighttpd:lighttpd /var/www/localhost/ /var/log/lighttpd 
 # rc-update add lighttpd default
 
-# vi /etc/init.d/lighttpd
+# vi /etc/init.d/lighttpd (What if I "rc-update add networking"?)
 depend() {
 #       need net
         use mysql logger spawn-fcgi ldap slapd netmount dns
