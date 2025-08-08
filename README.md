@@ -266,7 +266,7 @@ dad_joke_generator.h 100% |********************************|  7883  0:00:00 ETA
 'dad_joke_generator.html' saved
 ```
 ### Test the Dad Jokes Function Page
-<img width="1249" height="865" alt="DadJokePage" src="https://github.com/user-attachments/assets/07d7d7f6-a26c-4457-affb-56fe7bec5786" />
+<img width="1248" height="805" alt="DadJokePage2" src="https://github.com/user-attachments/assets/d4c070fe-9682-463e-b66f-2a120103943b" />
 
 # Performance and Resource Usage
 ## Performance
