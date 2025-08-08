@@ -135,7 +135,7 @@ Kernel 6.1.128 on an x86_64 (/dev/ttyS0)
 ### Dennis' Hacky Crap to Get Guest Networking Working
 There are much more elegant ways to do this, but this is what worked for me
 Basically, I want to configure eth0 on the guest, and start the ssh-server on boot.
-All these commands are run in the VM once it is booted, and you have logged into the console as root/root
+All these commands are run in the VM once it is booted, and you have logged into the console as root/root. 
 Commands are from this tutorial: https://github.com/firecracker-microvm/firecracker/blob/main/docs/network-setup.md#in-the-guest
 
 ##### Create an init.d script
